@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!-- 网页使用的语言 -->
+<html lang="zh-CN">
+    <head>
+    	<base href="<%=basePath%>"/>
+        <!-- 指定字符集 -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>修改用户</title>
+
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <script src="js/jquery-3.3.1.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script>
+            //获取参数id的方法
+            function getUrl() {
+                var href = window.location.href;
+                console.log(href)
+                var id = href.split("?")[1];
+                if (id!=""||id!=null){
+                   return id.split("=")[1];
+                }
+                return null;
+            }
+            var a = getUrl();
+            window.onload=function () {
+
+                console.log(a);
+                $("#id").val(a)
+            }
+
+            $(function () {
+
+                $.ajax({
+                    url:"/stugraman/getStudent?id="+a,
+                    type:"GET",
+                    dataType:"json",
+                    success:function (data) {
+                      //  console.log(data);
+                        $("#name").val(data.name);
+                        $("#number").val(data.number);
+                        if ($("#nan").val() == data.sex) {
+                            $("#nan").attr('checked', 'true')
+                        }
+                        if ($("#nv").val() == data.sex) {
+                            $("#nv").attr('checked', 'true')
+                        }
+                        $("#qq").val(data.qq);
+                        $("#phone").val(data.phone);
+                    }
+                })
+
+            })
+
+        </script>
+    </head>
+    <body>
+        <div class="container" style="width: 400px;">
+        <h3 style="text-align: center;">修改学生</h3>
+        <form action="/stugraman/updateStudent" method="post">
+            <input type="hidden" id="id" name="id">
+          <div class="form-group">
+            <label for="name">姓名：</label>
+            <input type="text" class="form-control" id="name" name="name"  readonly="readonly" placeholder="请输入姓名" />
+          </div>
+            <div class="form-group">
+            <label for="name">账号：</label>
+            <input type="text" class="form-control" id="number" name="number"  readonly="readonly" placeholder="请输入账号" />
+          </div>
+
+          <div class="form-group">
+            <label>性别：</label>
+              <input type="radio" name="sex" value="男"  id="nan"/>男
+                <input type="radio" name="sex" value="女" id="nv" />女
+          </div>
+
+
+          <div class="form-group">
+            <label for="qq">QQ：</label>
+            <input type="text" class="form-control" name="qq" placeholder="请输入QQ号码" id="qq"/>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">手机号码：</label>
+            <input type="text" class="form-control" name="phone" placeholder="请输入邮箱地址" id="phone"/>
+          </div>
+
+             <div class="form-group" style="text-align: center">
+                <input class="btn btn-primary" type="submit" value="提交" />
+                <input class="btn btn-default" type="reset" value="重置" />
+                <input class="btn btn-default" type="button" value="返回"/>
+             </div>
+        </form>
+        </div>
+    </body>
+</html>

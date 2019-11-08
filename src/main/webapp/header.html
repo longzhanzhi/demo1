@@ -1,0 +1,89 @@
+<!-- 头部 start -->
+<script>
+    function quit() {
+        $.post("user/quit",{},function (data) {
+            if(data.flag){
+                location.href="login.html";
+            }
+        },"json");
+    };
+    $(function () {
+        $.get("user/loginOne",{},function (login) {
+            if(login.flag){
+                if(login.data.type==1){
+                    $("#adminfeat").show();
+                    $("#studentfeat").hide();
+                    $("#teacherfeat").hide();
+                }
+                else if(login.data.type==2){
+                    $("#adminfeat").hide();
+                    $("#studentfeat").show();
+                    $("#teacherfeat").hide();
+                }else if (login.data.type==3) {
+                    $("#adminfeat").hide();
+                    $("#studentfeat").hide();
+                    $("#teacherfeat").show();
+                }
+
+                $("#login_in").html("<li><a href=\"javascript: quit();\">退出登录</a></li><li><a href=\"login.html\">更改用户</a></li>");
+            }else{
+                location.href = "login.html";
+            }
+            },"json");
+    });
+
+    function addActive(obj) {
+        $(obj).addClass("active");
+        $(obj).siblings().removeClass("active");
+    }
+
+</script>
+<header id="header">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">学生成绩管理系统</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav" id="adminfeat">
+                    <li><a href="adminCourceList.html">课程信息管理</a></li>
+                    <li><a href="adminAccountList.html" >账号管理</a></li>
+                    <li><a href="adminFindTeacherList.html" >老师基本信息管理</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav" id="studentfeat">
+                    <li><a href="stuScoreList.html">成绩查询</a></li>
+                    <li><a href="stulist.html">基本信息管理</a></li>
+                </ul>
+                <ul class="nav navbar-nav" id="teacherfeat">
+                    <li><a href="teachScoreList.html">学生成绩查询</a></li>
+                    <li><a href="teacherFinStudentList.html">学生基本信息查询</a></li>
+                    <li><a href="teacherList.html">基本信息管理</a></li>
+                </ul>
+
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">登录管理<span class="caret"></span></a>
+                        <ul class="dropdown-menu" id="login_in">
+
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<!-- 头部 end -->
+<!-- 首页导航 -->
+

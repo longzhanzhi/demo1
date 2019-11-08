@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!-- 网页使用的语言 -->
+<html lang="zh-CN">
+<head>
+    <!-- 指定字符集 -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>学生成绩管理系统</title>
+
+    <!-- 1. 导入CSS的全局样式 -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <script src="js/jquery-3.3.1.js"></script>
+    <!-- 3. 导入bootstrap的js文件 -->
+    <script src="js/include.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <style type="text/css">
+        td, th {
+            text-align: center;
+            border: 1px solid #fff;
+        }
+    </style>
+    <script>
+
+
+        $(function () {
+            $.get("/stugraman/stu/findOne",{},function (stu) {
+                var str="<tr class=\"success\">  <th>编号</th>\n" +
+                    "                 <th>姓名</th>\n" +
+                    "                 <th>学号</th>\n" +
+                    "                 <th>性别</th>\n" +
+                    "                 <th>电话</th>\n" +
+                    "                 <th>QQ</th> <th>操作</th></tr>\n";
+                str+="<tr class=\"success\"> " +
+                    "<td>"+stu.data.id+"</td>\n" +
+                    "<td>"+stu.data.name+"</td>\n" +
+                    "<td>"+stu.data.number+"</td>\n" +
+                    "<td>"+stu.data.sex+"</td>\n" +
+                    "<td>"+stu.data.phone+"</td>\n" +
+                    "<td>"+stu.data.qq+"</td><td><a class=\"btn btn-default btn-sm\" href=Stuupdate.html?id="+stu.data.id+">修改</a></td></tr>" ;
+                $("#stu").html(str);
+            },"json");
+        })
+
+    </script>
+</head>
+<body  style="background: url('images/list.jpg');color: #d43f3a;background-size: 100% ;">
+<div id="header"></div>
+<div class="container">
+    <h3 style="text-align: center">用户信息列表</h3>
+    <table style="border: 1px solid #fff;color: #fff;background-color: rgba(44,44,44,.6);" id="stu"  border="1" class="table table-bordered table-hover">
+        <tr class="success">
+            <th>编号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>年龄</th>
+            <th>籍贯</th>
+            <th>QQ</th>
+            <th>邮箱</th>
+            <th>操作</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>张三</td>
+            <td>男</td>
+            <td>20</td>
+            <td>广东</td>
+            <td>44444222</td>
+            <td>zs@qq.com</td>
+            <td><a class="btn btn-default btn-sm" href="update.html">修改</a>&nbsp;<a class="btn btn-default btn-sm" href="">删除</a></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>张三</td>
+            <td>男</td>
+            <td>20</td>
+            <td>广东</td>
+            <td>44444222</td>
+            <td>zs@qq.com</td>
+            <td><a class="btn btn-default btn-sm" href="update.html">修改</a>&nbsp;<a class="btn btn-default btn-sm" href="">删除</a></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>张三</td>
+            <td>男</td>
+            <td>20</td>
+            <td>广东</td>
+            <td>44444222</td>
+            <td>zs@qq.com</td>
+            <td><a class="btn btn-default btn-sm" href="update.html">修改</a>&nbsp;<a class="btn btn-default btn-sm" href="">删除</a></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>张三</td>
+            <td>男</td>
+            <td>20</td>
+            <td>广东</td>
+            <td>44444222</td>
+            <td>zs@qq.com</td>
+            <td><a class="btn btn-default btn-sm" href="update.html">修改</a>&nbsp;<a class="btn btn-default btn-sm" href="">删除</a></td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>张三</td>
+            <td>男</td>
+            <td>20</td>
+            <td>广东</td>
+            <td>44444222</td>
+            <td>zs@qq.com</td>
+            <td><a class="btn btn-default btn-sm" href="update.html">修改</a>&nbsp;<a class="btn btn-default btn-sm" href="">删除</a></td>
+        </tr>
+        <tr>
+            <td colspan="8" align="center"><a class="btn btn-primary" href="add.html">添加联系人</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!-- 网页使用的语言 -->
+<html lang="zh-CN">
+<head>
+    <!-- 指定字符集 -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>用户信息管理系统</title>
+
+    <!-- 1. 导入CSS的全局样式 -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <script src="js/jquery-3.3.1.js"></script>
+    <!-- 3. 导入bootstrap的js文件 -->
+    <script src="js/include.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <style type="text/css">
+        td, th {
+            text-align: center;
+            border: 1px solid #fff;
+        }
+    </style>
+    <script>$(function () {
+        $.get("admin/findAccont",{},function (account) {
+            var str = "<tr class=\"success\">\ <th>编号</th><th>用户名</th> <th>密码</th><th>姓名</th><th>类型id</th></tr>";
+            for (var i = 0; i < account.length; i++) {
+
+                /**
+                 <tr>
+                 <td>5</td>
+                 <td>张三</td>
+                 <td><a class="btn btn-default btn-sm" href="update.html">修改</a>&nbsp;<a class="btn btn-default btn-sm" href="">删除</a></td>
+                 </tr>
+                 <tr>
+                 <td colspan="8" align="center"><a class="btn btn-primary" href="add.html">添加联系人</a></td>
+                 </tr>
+                 */
+                str+=" <tr><td>"+ account[i].id +"</td><td>"+ account[i].username +"</td><td>"+ account[i].password +"</td> <td>"+ account[i].name +"</td> <td>"+ account[i].type +"</td></tr>"
+            }
+            $("#account").html(str);
+        },"json");
+    })
+
+    </script>
+</head>
+<body  style="background: url('images/adminList.jpg');color: #d43f3a;background-size: 100% ;">
+<div id="header"></div>
+<div class="container">
+    <h3 style="text-align: center">账号信息表</h3>
+    <table style="border: 1px solid #fff;color: #fff;background-color: rgba(44,44,44,.6);" class="table table-bordered table-hover" id="account">
+
+    </table>
+</div>
+</body>
+</html>

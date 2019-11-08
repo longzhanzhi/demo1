@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!-- 网页使用的语言 -->
+<html lang="zh-CN">
+<head>
+    <!-- 指定字符集 -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>用户信息管理系统</title>
+
+    <!-- 1. 导入CSS的全局样式 -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <script src="js/jquery-3.3.1.js"></script>
+    <!-- 3. 导入bootstrap的js文件 -->
+    <script src="js/include.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <style type="text/css">
+        td, th {
+            text-align: center;
+            border: 1px solid #fff;
+        }
+    </style>
+<script>
+    $(function () {
+        $.get("/stugraman/teacher/findAllStudnet",{},function (student) {
+            var str="<tr class=\"success\">  <th>编号</th>\n" +
+                "                 <th>姓名</th>\n" +
+                "                 <th>学号</th>\n" +
+                "                 <th>性别</th>\n" +
+                "                 <th>电话</th>\n" +
+                "                 <th>QQ</th><th>操作</th></tr>\n";
+            for (var i = 0; i < student.data.length; i++) {
+                str+="<tr class=\"success\"> " +
+                    "<td>"+student.data[i].id+"</td>\n" +
+                    "<td>"+student.data[i].name+"</td>\n" +
+                    "<td>"+student.data[i].number+"</td>\n" +
+                    "<td>"+student.data[i].sex+"</td>\n" +
+                    "<td>"+student.data[i].phone+"</td>\n" +
+                    "<td>"+student.data[i].qq+"</td><td><a class=\"btn btn-default btn-sm\" href=Stuupdate.html?id="+student.data[i].id+">修改</a></td></tr>\n" ;
+            }
+            $("#teacher").html(str);
+        },"json");
+    })
+
+</script>
+</head>
+<body  style="background: url('images/stuList.jpg');color: #d43f3a;background-size: 100% ;">
+<div id="header"></div>
+<div class="container">
+    <div class="container">
+        <h3 style="text-align: center">课程信息表</h3>
+        <table style="border: 1px solid #fff;color: #fff;background-color: rgba(44,44,44,.6);" class="table table-bordered table-hover" id="teacher">
+
+        </table>
+    </div>
+</div>
+</body>
+</html>

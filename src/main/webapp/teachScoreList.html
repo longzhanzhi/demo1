@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!-- 网页使用的语言 -->
+<html lang="zh-CN">
+<head>
+    <!-- 指定字符集 -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>用户信息管理系统</title>
+
+    <!-- 1. 导入CSS的全局样式 -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <script src="js/jquery-3.3.1.js"></script>
+    <!-- 3. 导入bootstrap的js文件 -->
+    <script src="js/include.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <style type="text/css">
+        td, th {
+            text-align: center;
+            border: 1px solid #fff;
+        }
+    </style>
+    <script>
+        $(function () {
+            $.get("/stugraman/teacher/findScore",{},function (stuscore) {
+                var str="<tr class=\"success\">" +
+                    "<th>编号</th><th>姓名</th>";
+                for (var i = 0; i < stuscore.data[0].scores.length; i++) {
+                    str+="<th>"+ stuscore.data[0].scores[i].courseName +"</th>";
+                }
+                str+="</tr>"
+
+                var obj = stuscore.data;
+                for (var j = 0; j < obj.length; j++) {
+                    str+=" <tr>\n" +
+                    "            <td>"+obj[j].id+"</td>\n" +
+                    "            <td>"+obj[j].name+"</td>\n";
+
+                    for (var i = 0; i < obj[j].scores.length; i++) {
+                        var score = obj[j].scores[i].score;
+                        str+="<td>"+ score +"</td>";
+                    }
+                    str+= "</tr>"
+                }
+
+                $("#score").html(str);
+            },"json");
+        })
+
+    </script>
+</head>
+<body  style="background: url('images/stuList.jpg');color: #d43f3a;background-size: 100% ;">
+<div id="header"></div>
+<div class="container">
+    <div class="container">
+        <h3 style="text-align: center">课程信息表</h3>
+        <table style="border: 1px solid #fff;color: #fff;background-color: rgba(44,44,44,.6);" class="table table-bordered table-hover" id="score">
+
+        </table>
+    </div>
+</div>
+</body>
+</html>
